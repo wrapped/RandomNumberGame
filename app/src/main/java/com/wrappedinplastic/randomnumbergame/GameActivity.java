@@ -1,5 +1,8 @@
 package com.wrappedinplastic.randomnumbergame;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -38,15 +41,29 @@ public class GameActivity extends AppCompatActivity {
         String value = txtGuess.getText().toString();
         int guessInt = Integer.parseInt(value);
         if (random == guessInt){
-            txtResult.setText("Correct");
+            //txtResult.setText("Correct!");
+            AlertDialog.Builder popUp = new AlertDialog.Builder(this);
+            popUp.setTitle("Correct!");
+            popUp.setMessage("You guessed the right number!" + "\n" + "It took you " + guessCount + " guesses." + "\n" + "The correct number was " + random + ".");
+            popUp.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int i) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+            popUp.setCancelable(false);
+            popUp.show();
+
         } else if (guessInt < random) {
             txtResult.setText("Too low!");
             guessCount++;
-            txtCounter.setText(String.valueOf(guessCount));
+            txtCounter.setText("Guess #" + String.valueOf(guessCount));
         } else if (guessInt > random) {
             txtResult.setText("Too high!");
             guessCount++;
-            txtCounter.setText(String.valueOf(guessCount));
+            txtCounter.setText("Guess #" + String.valueOf(guessCount));
         }
 
     }
