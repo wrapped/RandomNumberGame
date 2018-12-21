@@ -2,6 +2,6 @@
     <string name="app_name">Random Number Game</string>
     <string name="Main_Title">Random Number Game</string>
     <string name="button_play">Play</string>
-    <string name="guess_a_number">Guess a number</string>
     <string name="guess">Guess</string>
+    <string name="guess_a_number">Guess a number</string>
 </resources>

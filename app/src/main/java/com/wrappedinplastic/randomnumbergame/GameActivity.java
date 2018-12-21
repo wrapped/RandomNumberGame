@@ -56,7 +56,7 @@ public class GameActivity extends AppCompatActivity {
         } else {
 
             if (random == guessInt) {
-                //txtResult.setText("Correct!");
+                txtResult.setText("");
                 AlertDialog.Builder popUp = new AlertDialog.Builder(this);
                 popUp.setTitle("Correct!");
                 popUp.setMessage("You guessed the right number!" + "\n" + "It took you " + guessCount + " guesses." + "\n" + "The correct number was " + random + ".");
@@ -72,11 +72,13 @@ public class GameActivity extends AppCompatActivity {
                 popUp.show();
 
             } else if (guessInt < random) {
-                txtResult.setText("Too low!");
+                txtGuess.setText("");
+                txtResult.setText(value + " is too low!");
                 guessCount++;
                 txtCounter.setText("Guess #" + String.valueOf(guessCount));
             } else if (guessInt > random) {
-                txtResult.setText("Too high!");
+                txtGuess.setText("");
+                txtResult.setText(value + " is too high!");
                 guessCount++;
                 txtCounter.setText("Guess #" + String.valueOf(guessCount));
             }
