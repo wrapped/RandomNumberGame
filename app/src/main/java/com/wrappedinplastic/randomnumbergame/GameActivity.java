@@ -34,36 +34,52 @@ public class GameActivity extends AppCompatActivity {
         txtTesting.setText(String.valueOf(random));
 
 
-
     }
 
-    public void guess(View view){
+    public void guess(View view) {
         String value = txtGuess.getText().toString();
         int guessInt = Integer.parseInt(value);
-        if (random == guessInt){
-            //txtResult.setText("Correct!");
-            AlertDialog.Builder popUp = new AlertDialog.Builder(this);
-            popUp.setTitle("Correct!");
-            popUp.setMessage("You guessed the right number!" + "\n" + "It took you " + guessCount + " guesses." + "\n" + "The correct number was " + random + ".");
-            popUp.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+        AlertDialog.Builder verify = new AlertDialog.Builder(this);
+
+        if (guessInt > 100 || guessInt < 1) {
+            verify.setTitle("Input error!");
+            verify.setMessage("Please enter a number between 1 and 100");
+            verify.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int i) {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                    txtGuess.setText("");
                 }
             });
-            popUp.setCancelable(false);
-            popUp.show();
+            verify.setCancelable(false);
+            verify.show();
+        } else {
 
-        } else if (guessInt < random) {
-            txtResult.setText("Too low!");
-            guessCount++;
-            txtCounter.setText("Guess #" + String.valueOf(guessCount));
-        } else if (guessInt > random) {
-            txtResult.setText("Too high!");
-            guessCount++;
-            txtCounter.setText("Guess #" + String.valueOf(guessCount));
+            if (random == guessInt) {
+                //txtResult.setText("Correct!");
+                AlertDialog.Builder popUp = new AlertDialog.Builder(this);
+                popUp.setTitle("Correct!");
+                popUp.setMessage("You guessed the right number!" + "\n" + "It took you " + guessCount + " guesses." + "\n" + "The correct number was " + random + ".");
+                popUp.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                popUp.setCancelable(false);
+                popUp.show();
+
+            } else if (guessInt < random) {
+                txtResult.setText("Too low!");
+                guessCount++;
+                txtCounter.setText("Guess #" + String.valueOf(guessCount));
+            } else if (guessInt > random) {
+                txtResult.setText("Too high!");
+                guessCount++;
+                txtCounter.setText("Guess #" + String.valueOf(guessCount));
+            }
         }
 
     }

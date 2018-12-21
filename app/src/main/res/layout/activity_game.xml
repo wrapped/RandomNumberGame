@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20sp"
         android:ems="10"
+        android:digits="0123456789."
         android:inputType="number"
         android:text=""
         android:textColor="@android:color/white"
