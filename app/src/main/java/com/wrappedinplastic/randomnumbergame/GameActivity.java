@@ -53,15 +53,17 @@ public class GameActivity extends AppCompatActivity {
 
             if (random == guessInt) {
                 txtResult.setText("");
+                guessCount++;
                 AlertDialog.Builder popUp = new AlertDialog.Builder(this);
                 popUp.setTitle("Correct!");
                 popUp.setMessage("You guessed the right number!" + "\n" + "You guessed " + guessCount + " times." + "\n" + "The correct number was " + random + ".");
                 popUp.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), HighscoreActivity.class);
+                        intent.putExtra("SCORE", guessCount);
                         startActivity(intent);
-                        finish();
+                        GameActivity.this.finish();
                     }
                 });
                 popUp.setCancelable(false);
